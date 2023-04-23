@@ -21,7 +21,7 @@ export const TeamScreen = () => {
           style={{
             fontSize: 30,
             fontStyle: "italic",
-            color: "violet",
+            color: "#89ccfE",
             textAlign: "center",
           }}
         >

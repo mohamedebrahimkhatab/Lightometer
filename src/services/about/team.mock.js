@@ -1,6 +1,6 @@
 export const develpers = [
   {
-    image: require("../../../assets/Team/1.png"),
+    image: require("../../../assets/Team/10.png"),
     name: "Mohamed Khatab",
     email: "mohamedebrahimkhatab@gmail.com",
   },
@@ -12,22 +12,22 @@ export const develpers = [
   {
     image: require("../../../assets/Team/3.png"),
     name: "Adnan Tawakol",
-    email: "adnanTemp@gmail.com",
+    email: "adnantawakol@gmail.com",
   },
   {
     image: require("../../../assets/Team/4.png"),
     name: "Diaa Eltaiby",
-    email: "DiaaTemp@gmail.com",
+    email: "diaa30981546@f-eng.tanta.edu.eg",
   },
   {
     image: require("../../../assets/Team/5.png"),
     name: "AhmedHegazy",
-    email: "ahmedtemp@gmail.com",
+    email: "ahmed30981519@f-eng.tanta.edu.eg",
   },
   {
     image: require("../../../assets/Team/6.png"),
     name: "Ahmed Ebrahim",
-    email: "ahmedtemp@gmail.com",
+    email: "ahmed30981557@f-eng.tanta.edu.eg",
   },
   {
     image: require("../../../assets/Team/7.png"),
