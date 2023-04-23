@@ -20,7 +20,7 @@ const DeveloperName = styled.Text`
 
 export const DeveloperInfoCard = ({ developer = {} }) => {
   const {
-    image = require(`../../../assets/Team/hasabalah.jpg`),
+    image = require(`../../../assets/Team/1.png`),
     name = "",
     email = "",
   } = developer;

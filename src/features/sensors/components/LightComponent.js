@@ -9,6 +9,7 @@ import {
 import { LightSensor } from "expo-sensors";
 
 export const LightComponent = () => {
+
   const [{ illuminance }, setData] = useState({ illuminance: 0 });
 
   useEffect(() => {
