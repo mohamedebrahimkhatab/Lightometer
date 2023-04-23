@@ -11,7 +11,6 @@ export const ResultScreen = ({ route }) => {
   const { reads } = route.params;
 
   const average = (array) => {
-
     var total = 0;
     console.log(array);
     for (var i = 0; i < array.length; i++) {

@@ -26,7 +26,7 @@ export const AppNavigator = () => (
       })}
     >
       
-      {/* <Tab.Screen name="Sensors" component={SensorsNavigator} /> */}
+      <Tab.Screen name="Sensors" component={SensorsNavigator} />
       <Tab.Screen name="Application" component={ApplicationNavigator} />
       {/* <Tab.Screen name="About" component={AboutNavigator} /> */}
     </Tab.Navigator>

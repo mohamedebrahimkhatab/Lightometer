@@ -10,13 +10,13 @@ const AppContainer = styled.View`
   align-items: center;
   justify-content: center;
 `;
-const reads = [];
 export const ApplicationScreen = ({ navigation }) => {
   const [{ illuminance }, setData] = useState({ illuminance: 0 });
   const [counterSeconds, setCounterSeconds] = useState(5);
   const [started, setStarted] = useState(true);
   const colors = ["#FFFEFF", `#D9FFFE`, `#111111`];
   const [gradientColors, setGradientColors] = useState(colors);
+  let reads = [];
   useEffect(() => {
     if (started) {
       _toggle();
@@ -27,26 +27,25 @@ export const ApplicationScreen = ({ navigation }) => {
   }, []);
 
   const _toggle = () => {
-    if (this._subscription) {
-      _unsubscribe();
-    } else {
-      _subscribe();
-    }
+    if (this._subscription) _unsubscribe();
+    else _subscribe();
   };
 
   const _subscribe = () => {
     this._subscription = LightSensor.addListener((data) => {
       setData(data);
-      if (reads.length < 200) reads.push(data.illuminance);
+      reads = [...reads, data.illuminance];
+      // console.log(reads);
+      //console.log(`${reads.length} : ${[...reads]}`);
     });
   };
 
   const afterall = (reset) => {
     setCounterSeconds(5);
     setStarted(false);
-    reset();
+    //reset();
     navigation.navigate("ResultScreen", { reads: reads });
-    console.log(counterSeconds);
+    // console.log(counterSeconds);
   };
   const _unsubscribe = () => {
     this._subscription && this._subscription.remove();
@@ -74,7 +73,12 @@ export const ApplicationScreen = ({ navigation }) => {
           ) : (
             <Text></Text>
           )}
-          <Button title="Start Measurring" onPress={()=>{setStarted(true);}} />
+          <Button
+            title="Start Measurring"
+            onPress={() => {
+              setStarted(true);
+            }}
+          />
         </AppContainer>
       </LinearGradient>
     </SafeArea>

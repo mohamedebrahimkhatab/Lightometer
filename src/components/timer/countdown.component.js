@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet } from "react-native";
 
-
-const secondToMillis = (min) => min * 1000 ;
+const secondToMillis = (sec) => sec * 1000;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
-export const Countdown = ({ seconds = 0.1, isPaused, onProgress, onEnd,style }) => {
+export const Countdown = ({
+  seconds = 0.1,
+  isPaused,
+  onProgress,
+  onEnd,
+  style,
+}) => {
   const interval = React.useRef(null);
 
   const [millis, setMillis] = useState(null);
-  const reset = ()=> setMillis(secondToMillis(seconds));
-  
+  const reset = () => setMillis(secondToMillis(seconds));
+
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
         clearInterval(interval.current);
         onEnd(reset);
+        reset();
+        console.log(millis);
         return time;
       }
       const timeLeft = time - 1000;
@@ -31,27 +38,27 @@ export const Countdown = ({ seconds = 0.1, isPaused, onProgress, onEnd,style }) 
   }, [millis]);
 
   useEffect(() => {
+    
     if (isPaused) {
       if (interval.current) clearInterval(interval.current);
       return;
     }
 
     interval.current = setInterval(countDown, 1000);
+    setMillis(secondToMillis(seconds));
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
   const seconds_remaining = Math.floor(millis / 1000) % 60;
   return (
-    <Text style={[styles.text,style]}>
-      {formatTime(seconds_remaining)}
-    </Text>
+    <Text style={[styles.text, style]}>{formatTime(seconds_remaining)}</Text>
   );
 };
 
 const styles = StyleSheet.create({
   text: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 10,
   },
 });
