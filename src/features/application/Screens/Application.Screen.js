@@ -1,41 +1,80 @@
-import React, { useState } from "react";
-import { View, Text,Button } from "react-native";
+import { useState, useEffect } from "react";
+import { View, Text, Button } from "react-native";
 import { SafeArea } from "../../../components/SafeArea/SafeArea.Component";
 import { LinearGradient } from "expo-linear-gradient";
 import { LightSensor } from "expo-sensors";
 import styled from "styled-components";
+import { Countdown } from "../../../components/timer/countdown.component";
 const AppContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
 `;
-export const ApplicationScreen = () => {
+const reads = [];
+export const ApplicationScreen = ({ navigation }) => {
   const [{ illuminance }, setData] = useState({ illuminance: 0 });
-  const colors=["#FFFEFF", `#D${illuminance%10}FFFE`, `#${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}`];
+  const [counterSeconds, setCounterSeconds] = useState(5);
+  const [started, setStarted] = useState(true);
+  const colors = ["#FFFEFF", `#D9FFFE`, `#111111`];
   const [gradientColors, setGradientColors] = useState(colors);
+  useEffect(() => {
+    if (started) {
+      _toggle();
+      return () => {
+        _unsubscribe();
+      };
+    }
+  }, []);
 
+  const _toggle = () => {
+    if (this._subscription) {
+      _unsubscribe();
+    } else {
+      _subscribe();
+    }
+  };
 
-  const Increase=()=>{
-    setLevel(illuminance+1);
-    setGradientColors(["#FFFEFF", `#D${illuminance%10}FFFE`, `#${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}${illuminance%10}`]);
-    console.log(illuminance);
-  }
+  const _subscribe = () => {
+    this._subscription = LightSensor.addListener((data) => {
+      setData(data);
+      if (reads.length < 200) reads.push(data.illuminance);
+    });
+  };
+
+  const afterall = (reset) => {
+    setCounterSeconds(5);
+    setStarted(false);
+    reset();
+    navigation.navigate("ResultScreen", { reads: reads });
+    console.log(counterSeconds);
+  };
+  const _unsubscribe = () => {
+    this._subscription && this._subscription.remove();
+    this._subscription = null;
+  };
 
   return (
     <SafeArea>
-      <LinearGradient
-        colors={gradientColors}
-        style={{ flex: 1 }}
-      >
+      <LinearGradient colors={gradientColors} style={{ flex: 1 }}>
         <AppContainer>
-          <Text>Application</Text>
-          <Text>
-            Illuminance:{" "}
-            {Platform.OS === "android"
-              ? `${illuminance} lx`
-              : `Only available on Android`}
-          </Text>
-          <Button title="meassure" onPress={Increase} />
+          <Countdown
+            seconds={counterSeconds}
+            isPaused={!started}
+            onProgress={() => null}
+            onEnd={afterall}
+          />
+          <Text>Measurring</Text>
+          {started ? (
+            <Text>
+              Illuminance:{" "}
+              {Platform.OS === "android"
+                ? `${illuminance} lx`
+                : `Only available on Android`}
+            </Text>
+          ) : (
+            <Text></Text>
+          )}
+          <Button title="Start Measurring" onPress={()=>{setStarted(true);}} />
         </AppContainer>
       </LinearGradient>
     </SafeArea>
