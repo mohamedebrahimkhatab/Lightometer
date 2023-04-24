@@ -23,7 +23,7 @@ export const SensorsNavigator = () => {
         ...TransitionPresets.ModalSlideFromBottomIOS,
       }}
     >
-      {/* <SensorsStack.Screen name="sensors" component={SensorsScreen} />
+      <SensorsStack.Screen name="sensors" component={SensorsScreen} />
       <SensorsStack.Screen
         name="Accelerometer"
         component={AccelerometerComponent}
@@ -36,7 +36,7 @@ export const SensorsNavigator = () => {
         name="Magnetometer"
         component={MagnetometerComponent}
       />
-      <SensorsStack.Screen name="Camera" component={CameraComponent} /> */}
+      <SensorsStack.Screen name="Camera" component={CameraComponent} />
       <SensorsStack.Screen name="NetInfo" component={NetInfoComponent} />
       <SensorsStack.Screen name="Orientation" component={OrientationComponent} />
     </SensorsStack.Navigator>
