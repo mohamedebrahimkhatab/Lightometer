@@ -32,11 +32,11 @@ export const develpers = [
   {
     image: require("../../../assets/Team/7.png"),
     name: "Mohamed Sweilam",
-    email: "mohamedtemp@gmail.com",
+    email: "muhamed.sweilam@gmail",
   },
   {
     image: require("../../../assets/Team/8.png"),
     name: "Omnia Khalil",
-    email: "onmia@gmail.com",
+    email: "omniaakhalill@gmail.com",
   },
 ];
