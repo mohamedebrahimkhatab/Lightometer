@@ -17,7 +17,8 @@ export const ApplicationScreen = ({ navigation }) => {
   const [{ illuminance }, setData] = useState({ illuminance: 0 });
   const [counterSeconds, setCounterSeconds] = useState(5);
   const [started, setStarted] = useState(false);
-  const colors = ["#FFFEFF", `#D9FFFE`, `#111111`];
+  const[level,setLevel]=useState(1);
+  const colors = ["#FFFEFF", `#D9FFFE`, `rgb(${Math.ceil(illuminance)%255},${Math.ceil(illuminance)%255},${Math.ceil(illuminance)%255})`];
   const [gradientColors, setGradientColors] = useState(colors);
 
   const interval = React.useRef(null);
@@ -53,6 +54,11 @@ export const ApplicationScreen = ({ navigation }) => {
       return ;
     }
   }, []);
+
+  useEffect(()=>{
+    setLevel((illuminance<=255 ? Math.ceil(illuminance):255));
+    setGradientColors(["#FFFEFF", `#D9FFFE`, `rgb(${level},${level},${level})`]);
+  },[illuminance]);
 
   useEffect(() => {
     if (!started) {
