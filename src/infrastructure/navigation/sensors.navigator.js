@@ -11,6 +11,7 @@ import { LightComponent } from "../../features/sensors/components/LightComponent
 import { PedometerComponent } from "../../features/sensors/components/PedometerComponent";
 import { MagnetometerComponent } from "../../features/sensors/components/MagnetometerComponent";
 import { CameraComponent } from "../../features/sensors/components/CameraComponent";
+import { NetInfoComponent } from "../../features/sensors/components/NetInfoComponent";
 const SensorsStack = createStackNavigator();
 
 export const SensorsNavigator = () => {
@@ -35,6 +36,7 @@ export const SensorsNavigator = () => {
         component={MagnetometerComponent}
       />
       <SensorsStack.Screen name="Camera" component={CameraComponent} />
+      <SensorsStack.Screen name="NetInfo" component={NetInfoComponent} />
     </SensorsStack.Navigator>
   );
 };
