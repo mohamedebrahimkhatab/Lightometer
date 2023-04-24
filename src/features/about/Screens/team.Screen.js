@@ -11,7 +11,7 @@ const DeveloperInfoContainer = styled(Card)`
   margin: 2%;
   padding-top: 30px;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 `;
 export const TeamScreen = () => {
   return (
