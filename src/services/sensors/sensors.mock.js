@@ -6,5 +6,6 @@ export const sensors=[
     "Pedometer",
     "Camera",
     "Magnetometer",
-    "NetInfo"
+    "NetInfo",
+    "Orientation"
   ];
