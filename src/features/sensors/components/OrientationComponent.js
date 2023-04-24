@@ -12,7 +12,7 @@ export const OrientationComponent = () => {
         ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
       );
     } else if (orientationIsLandscape == false) {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
     }
   }
   const toggleOrientation = () => {
