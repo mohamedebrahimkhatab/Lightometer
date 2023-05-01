@@ -8,28 +8,31 @@ export const PedometerComponent = () => {
   const [currentStepCount, setCurrentStepCount] = useState(0);
 
   const subscribe = async () => {
-   try{
-     const isAvailable = await Pedometer.isAvailableAsync();
-     setIsPedometerAvailable(String(isAvailable));
+    try {
+      const isAvailable = await Pedometer.isAvailableAsync();
+      setIsPedometerAvailable(String(isAvailable));
 
-    if (isAvailable) {
-      const end = new Date();
-      const start = new Date();
-      start.setDate(end.getDate() - 1);
+      if (isAvailable) {
+        const end = new Date();
+        const start = new Date();
+        start.setDate(end.getDate() - 1);
 
-      const pastStepCountResult = await Pedometer.getStepCountAsync(start, end);
-      if (pastStepCountResult) {
-        setPastStepCount(pastStepCountResult.steps);
+        const pastStepCountResult = await Pedometer.getStepCountAsync(
+          start,
+          end
+        );
+        if (pastStepCountResult) {
+          setPastStepCount(pastStepCountResult.steps);
+        }
+
+        return Pedometer.watchStepCount((result) => {
+          setCurrentStepCount(result.steps);
+        });
       }
-
-      return Pedometer.watchStepCount((result) => {
-        setCurrentStepCount(result.steps);
-      });
+    } catch (error) {
+      return false;
+      console.log(error);
     }
-  }catch(error){
-    return false;
-    console.log(error);
-  }
   };
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export const PedometerComponent = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+      <Text>Pedometer is Available: {isPedometerAvailable}</Text>
       <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
       <Text>Walk! And watch this go up: {currentStepCount}</Text>
     </View>
